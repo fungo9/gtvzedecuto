@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTVZ MODDED</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background: radial-gradient(circle at top, #0a2f0a, #031003);
+color:white;
+text-align:center;
+overflow-x:hidden;
+position:relative;
+min-height:100vh;
+}
+
+/* BOLHAS VERDE NEON - MOVENDO DE UM LADO PARA OUTRO */
+.bubbles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:1;
+overflow:hidden;
+}
+
+.bubble{
+position:absolute;
+width:var(--size);
+height:var(--size);
+background:rgba(0, 255, 0, 0.1);
+border-radius:50%;
+border:1px solid rgba(0, 255, 0, 0.5);
+box-shadow:0 0 15px #00ff00, 0 0 30px #00ff00;
+animation:moveBubble var(--duration) linear infinite;
+opacity:var(--opacity);
+/* SEM DELAY - começa imediatamente */
+animation-delay:0s;
+}
+
+@keyframes moveBubble{
+0%{
+transform:translateX(-100px) translateY(var(--y-start));
+opacity:0;
+}
+5%{
+opacity:var(--opacity);
+}
+95%{
+opacity:var(--opacity);
+}
+100%{
+transform:translateX(calc(100vw + 100px)) translateY(var(--y-end));
+opacity:0;
+}
+}
+
+/* Conteúdo principal */
+.content{
+position:relative;
+z-index:2;
+}
+
+/* HEADER */
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 25px;
+background:rgba(0,20,0,0.7);
+backdrop-filter: blur(6px);
+border-bottom:1px solid #00ff0033;
+position:relative;
+z-index:3;
+}
+
+.logo{
+font-size:28px;
+font-weight:bold;
+letter-spacing:2px;
+animation: glow 2s infinite alternate;
+text-shadow:0 0 10px #00ff00;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 5px #00ff00, 0 0 10px #00ff00;}
+to{ text-shadow:0 0 20px #00ff00, 0 0 40px #00ff00;}
+}
+
+.menu{
+font-size:28px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.menu:hover{
+transform:scale(1.2);
+color:#00ff00;
+}
+
+/* MENU COM ANIMAÇÃO */
+.menu-box{
+display:none;
+background:#051005;
+padding:20px;
+border:1px solid #00ff0033;
+position:relative;
+z-index:3;
+opacity:0;
+transform:translateY(-20px);
+transition:opacity 0.4s ease, transform 0.4s ease;
+}
+
+.menu-box.show{
+display:block;
+opacity:1;
+transform:translateY(0);
+}
+
+.menu-box a{
+display:block;
+color:white;
+text-decoration:none;
+margin:12px;
+font-size:18px;
+transition:0.3s;
+opacity:0;
+transform:translateX(-10px);
+animation:fadeInItem 0.4s ease forwards;
+}
+
+.menu-box a:nth-child(1){
+animation-delay:0.1s;
+}
+.menu-box a:nth-child(2){
+animation-delay:0.2s;
+}
+.menu-box a:nth-child(3){
+animation-delay:0.3s;
+}
+
+.menu-box a:hover{
+color:#00ff00;
+transform:translateX(6px) !important;
+text-shadow:0 0 10px #00ff00;
+}
+
+/* LINHA NEON MAIS VISÍVEL ENTRE REDES E LINGUAGEM */
+.menu-divider{
+width:100%;
+height:3px;
+background:linear-gradient(90deg, transparent, #00ff00, #00ff00, #00ff00, transparent);
+margin:20px 0 15px 0;
+box-shadow:0 0 25px #00ff00, 0 0 50px #00ff00;
+border-radius:2px;
+}
+
+/* TEXTO LINGUAGEM */
+.language-title{
+color:#00ff00;
+font-size:16px;
+font-weight:bold;
+letter-spacing:2px;
+margin-bottom:15px;
+text-shadow:0 0 15px #00ff00, 0 0 30px #00ff00;
+animation:pulse 2s infinite alternate;
+}
+
+@keyframes pulse{
+from{ opacity:0.8; text-shadow:0 0 10px #00ff00; }
+to{ opacity:1; text-shadow:0 0 25px #00ff00, 0 0 45px #00ff00; }
+}
+
+/* DROPDOWN DE LINGUAGENS - CORRIGIDO */
+.language-dropdown {
+    position: relative;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px; /* Espaço para o dropdown não sair */
+}
+
+.dropdown-btn {
+    background: transparent;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeInItem 0.4s ease forwards;
+    animation-delay: 0.4s;
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho */
+}
+
+.dropdown-btn:hover {
+    background: #00ff00;
+    color: #031003;
+    box-shadow: 0 0 30px #00ff00;
+}
+
+.dropdown-btn.active {
+    background: #00ff00;
+    color: #031003;
+    font-weight: bold;
+    box-shadow: 0 0 30px #00ff00;
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-btn.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #0a1f0a;
+    border: 2px solid #00ff00;
+    border-radius: 8px;
+    margin-top: 5px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 999; /* Z-index mais alto */
+    box-sizing: border-box; /* Garante que borda não aumente o tamanho */
+    max-height: 300px; /* Limita altura máxima */
+    overflow-y: auto; /* Adiciona scroll se necessário */
+}
+
+/* Estilizar scrollbar para combinar com o tema */
+.dropdown-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-content::-webkit-scrollbar-track {
+    background: #0a1f0a;
+}
+
+.dropdown-content::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.dropdown-content.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.lang-option {
+    padding: 12px 15px;
+    cursor: pointer;
+    color: #00ff00;
+    transition: 0.3s;
+    border-bottom: 1px solid #00ff0033;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.lang-option:last-child {
+    border-bottom: none;
+}
+
+.lang-option:hover {
+    background: #00ff00;
+    color: #031003;
+    transform: translateX(5px);
+}
+
+.lang-option.selected {
+    background: #00ff00;
+    color: #031003;
+    font-weight: bold;
+}
+
+/* SELETOR DE IDIOMAS (antigo, escondido) */
+.language-selector{
+display:none;
+}
+
+@keyframes fadeInItem{
+0%{
+opacity:0;
+transform:translateX(-10px);
+}
+100%{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+/* HERO */
+
+.hero{
+padding:70px 20px;
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+animation:floatText 3s ease-in-out infinite;
+text-shadow:0 0 15px #00ff00;
+color:#ccffcc;
+}
+
+@keyframes floatText{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+}
+
+.hero p{
+opacity:0.9;
+color:#aaffaa;
+font-size:18px;
+}
+
+/* SEÇÃO DE CANAIS */
+.canais-section{
+margin-top:40px;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:20px;
+width:100%;
+}
+
+.canais-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+width:90%;
+max-width:800px;
+margin:0 auto;
+}
+
+.canal-card{
+flex:1;
+min-width:250px;
+max-width:350px;
+background:#0a1f0a;
+border:2px solid #00ff0033;
+border-radius:20px;
+padding:25px 20px;
+box-shadow:0 0 30px #00ff0033;
+cursor:pointer;
+transition:0.3s;
+}
+
+.canal-card:hover{
+transform:scale(1.05);
+border-color:#00ff00;
+box-shadow:0 0 50px #00ff00;
+}
+
+.canal-nome{
+font-size:24px;
+color:#00ff00;
+margin-bottom:10px;
+text-shadow:0 0 10px #00ff00;
+}
+
+.canal-sub{
+font-size:16px;
+color:#aaffaa;
+opacity:0.9;
+}
+
+/* LINHA SEPARADORA */
+.separator{
+width:80%;
+max-width:600px;
+height:2px;
+background:linear-gradient(90deg, transparent, #00ff00, #00ff00, #00ff00, transparent);
+margin:30px auto;
+box-shadow:0 0 20px #00ff00;
+}
+
+/* CARDS DE EXECUTORES */
+.executors-grid{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:30px;
+margin:30px 0;
+width:100%;
+}
+
+.executor-card{
+width:90%;
+max-width:500px;
+background:#0a1f0a;
+border:2px solid #00ff0033;
+border-radius:20px;
+padding:20px;
+box-shadow:0 0 30px #00ff0033;
+}
+
+.executor-title{
+font-size:24px;
+color:#00ff00;
+margin-bottom:15px;
+text-shadow:0 0 10px #00ff00;
+}
+
+.download-btn{
+padding:16px 35px;
+font-size:18px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+color:white;
+background:linear-gradient(45deg,#006400,#00aa00);
+transition:0.3s;
+box-shadow:0 0 20px #00ff00;
+border:1px solid #aaffaa;
+width:100%;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:20px;
+}
+
+.download-btn:hover{
+transform:scale(1.02);
+box-shadow:0 0 35px #00ff00;
+background:linear-gradient(45deg,#008000,#00ff00);
+}
+
+/* IMAGEM DO EXECUTOR */
+.executor-image{
+width:100%;
+height:200px;
+border-radius:15px;
+border:2px solid #00ff00;
+box-shadow:0 0 40px #00ff00;
+background:linear-gradient(145deg, #0a3a0a, #052005);
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:20px;
+overflow:hidden;
+}
+
+.executor-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+/* SEÇÃO ROBLOX LITE */
+.roblox-section{
+margin:40px auto;
+width:90%;
+max-width:500px;
+}
+
+.roblox-card{
+background:#0a1f0a;
+border:2px solid #00ff0033;
+border-radius:20px;
+padding:20px;
+box-shadow:0 0 30px #00ff0033;
+}
+
+.roblox-title{
+font-size:28px;
+color:#00ff00;
+margin-bottom:15px;
+text-shadow:0 0 15px #00ff00;
+}
+
+.roblox-image{
+width:100%;
+height:200px;
+border-radius:15px;
+border:2px solid #00ff00;
+box-shadow:0 0 40px #00ff00;
+background:linear-gradient(145deg, #0a3a0a, #052005);
+margin-bottom:20px;
+overflow:hidden;
+}
+
+.roblox-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.roblox-btn{
+padding:16px 35px;
+font-size:20px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+color:white;
+background:linear-gradient(45deg,#006400,#00aa00);
+transition:0.3s;
+box-shadow:0 0 20px #00ff00;
+border:1px solid #aaffaa;
+width:100%;
+font-weight:bold;
+letter-spacing:1px;
+margin-bottom:0;
+}
+
+.roblox-btn:hover{
+transform:scale(1.02);
+box-shadow:0 0 35px #00ff00;
+background:linear-gradient(45deg,#008000,#00ff00);
+}
+
+/* ESTILO PARA ÁRABE (RTL) */
+html[lang="ar"] {
+direction: rtl;
+}
+
+html[lang="ar"] .menu-box a:hover{
+transform:translateX(-6px) !important;
+}
+
+html[lang="ar"] .lang-option:hover {
+    transform: translateX(-5px);
+}
+
+footer{
+margin-top:50px;
+opacity:0.7;
+font-size:14px;
+padding:20px;
+border-top:1px solid #00ff0033;
+color:#aaffaa;
+position:relative;
+z-index:2;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BOLHAS VERDE NEON - MOVENDO DE UM LADO PARA OUTRO -->
+<div class="bubbles" id="bubbles"></div>
+
+<div class="content">
+<header>
+<div class="logo">GTVZ MODDED</div>
+<div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<div class="menu-box" id="menu">
+<a href="#" onclick="abrirCanal1()" id="linkCanal1">CANAL GT_MINGUI</a>
+<a href="#" onclick="abrirCanal2()" id="linkCanal2">CANAL GT_GTVZ MODDED</a>
+<a href="#" onclick="abrirDiscord()" id="linkDiscord">DISCORD OFC</a>
+
+<!-- LINHA NEON MAIS VISÍVEL -->
+<div class="menu-divider"></div>
+
+<!-- TEXTO LINGUAGEM -->
+<div class="language-title">LINGUAGEM</div>
+
+<!-- DROPDOWN DE LINGUAGENS - CORRIGIDO -->
+<div class="language-dropdown">
+    <div class="dropdown-btn" onclick="toggleDropdown()">
+        <span id="selectedLanguage">🇧🇷 PORTUGUÊS</span>
+        <span class="dropdown-arrow">▼</span>
+    </div>
+    <div class="dropdown-content" id="dropdownContent">
+        <div class="lang-option selected" onclick="selectLanguage('pt')">🇧🇷 PORTUGUÊS</div>
+        <div class="lang-option" onclick="selectLanguage('en')">🇺🇸 ENGLISH</div>
+        <div class="lang-option" onclick="selectLanguage('vi')">🇻🇳 VIÁTINA</div>
+        <div class="lang-option" onclick="selectLanguage('de')">🇩🇪 ALEMANHA</div>
+        <div class="lang-option" onclick="selectLanguage('ar')">🇸🇦 العربية</div>
+    </div>
+</div>
+</div>
+
+<section class="hero">
+
+<h1 id="tituloPrincipal">GTVZ MODDED</h1>
+<p id="descricaoPrincipal">ESSE SITE HOSPEDA TODOS SITE OFICIAL DO GTVZ MODDED</p>
+
+<!-- CARDS DOS CANAIS -->
+<div class="canais-section">
+<h2 style="color:#00ff00; margin-bottom:10px;" id="tituloCanais">MEUS CANAIS</h2>
+<div class="canais-container">
+<div class="canal-card" onclick="abrirCanal1()">
+<div class="canal-nome">GT_MINGUI</div>
+<div class="canal-sub" id="inscreva1">SE-INSCREVA</div>
+</div>
+<div class="canal-card" onclick="abrirCanal2()">
+<div class="canal-nome">GT_GTVZ MODDED</div>
+<div class="canal-sub" id="inscreva2">SE-INSCREVA</div>
+</div>
+</div>
+</div>
+
+<!-- LINHA SEPARADORA -->
+<div class="separator"></div>
+
+<!-- CARDS DOS EXECUTORES COM IMAGENS -->
+<div class="executors-grid">
+
+<!-- EXECUTOR V1 -->
+<div class="executor-card">
+<div class="executor-image">
+<img src="https://i.postimg.cc/DzSX6Lf3/file-00000000c3cc720eb507e969ef6e219d.png">
+</div>
+<div class="executor-title" id="executor1">SITE EXECUTO MODIFICADO NORMAL</div>
+<button class="download-btn" onclick="baixar('v1')" id="btnBaixar1">
+⬇️ BAIXAR AGORA
+</button>
+</div>
+
+<!-- EXECUTOR V2 KEYLESS -->
+<div class="executor-card">
+<div class="executor-image">
+<img src="https://i.postimg.cc/nVSMRMWR/file-00000000333c720e8eaea601e4770d9f.png">
+</div>
+<div class="executor-title" id="executor2">SITE EXECUTO MODIFICADO VNG</div>
+<button class="download-btn" onclick="baixar('v2')" id="btnBaixar2">
+⬇️ BAIXAR AGORA
+</button>
+</div>
+
+<!-- EXECUTOR V3 PREMIUM -->
+<div class="executor-card">
+<div class="executor-image">
+<img src="https://i.postimg.cc/Wb6mB9NY/file-000000002bb0720eac4136ad88338532.png" alt="GTVZ V3">
+</div>
+<div class="executor-title" id="executor3">SITE EXECUTO ORIGINAL</div>
+<button class="download-btn" onclick="baixar('v3')" id="btnBaixar3">
+⬇️ BAIXAR AGORA
+</button>
+</div>
+
+<!-- SCRIPT GENERATOR -->
+<div class="executor-card">
+<div class="executor-image">
+<img src="https://i.postimg.cc/Znfb3tPf/file-0000000025f071f598654ef7618e92aa.png" alt="GTVZ GEN">
+</div>
+<div class="executor-title" id="executor4">SITE EXECUTO ORIGINAL VNG</div>
+<button class="download-btn" onclick="baixar('v4')" id="btnBaixar4">
+⬇️ BAIXAR AGORA
+</button>
+</div>
+
+</div>
+
+<!-- LINHA SEPARADORA ENTRE EXECUTOR E ROBLOX LITE -->
+<div class="separator"></div>
+
+<!-- SEÇÃO ROBLOX LITE -->
+<div class="roblox-section">
+<div class="roblox-card">
+<div class="roblox-image">
+<img src="https://i.postimg.cc/Kc6JMc5D/file-00000000449c720eb3931b5e06030041.png" alt="Roblox Lite">
+</div>
+<div class="roblox-title" id="robloxTitulo">ROBLOX LITE</div>
+<button class="roblox-btn" onclick="baixarRoblox()" id="btnRoblox">
+⬇️ BAIXAR ROBLOX LITE
+</button>
+</div>
+</div>
+
+</section>
+
+<footer>
+<span id="footerTexto">GTVZ MODDED 2026 - Todos os direitos reservados</span><br>
+<span style="color:#00ff00; font-size:12px;">By GTVZ</span>
+</footer>
+</div>
+
+<script>
+// GERAR BOLHAS QUE SE MOVEM DE UM LADO PARA OUTRO - SEM DELAY
+function criarBubbles() {
+    const bubblesContainer = document.getElementById('bubbles');
+    const numeroBubbles = 30;
+    
+    for(let i = 0; i < numeroBubbles; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        
+        // Tamanho aleatório entre 5px e 40px
+        const size = 5 + Math.random() * 35;
+        bubble.style.setProperty('--size', size + 'px');
+        
+        // Posição vertical aleatória
+        const yPos = Math.random() * 100;
+        
+        // Variação na posição Y durante o movimento
+        const yStart = (Math.random() * 20 - 10) + 'vh';
+        const yEnd = (Math.random() * 20 - 10) + 'vh';
+        bubble.style.setProperty('--y-start', yStart);
+        bubble.style.setProperty('--y-end', yEnd);
+        
+        // Posição inicial na esquerda
+        bubble.style.left = '0';
+        bubble.style.top = yPos + '%';
+        
+        // Duração da animação entre 5s e 15s
+        const duration = 5 + Math.random() * 10;
+        bubble.style.setProperty('--duration', duration + 's');
+        
+        // SEM DELAY - todas começam imediatamente
+        bubble.style.animationDelay = '0s';
+        
+        // Opacidade variável
+        const opacity = 0.2 + Math.random() * 0.5;
+        bubble.style.setProperty('--opacity', opacity);
+        
+        // Adicionar algumas bolhas que vêm do lado direito também
+        if (i % 3 === 0) {
+            // Bolhas que vêm da direita para esquerda
+            bubble.style.left = 'auto';
+            bubble.style.right = '0';
+            bubble.style.animation = 'moveBubbleReverse var(--duration) linear infinite';
+            bubble.style.animationDelay = '0s'; // SEM DELAY
+            
+            // Adicionar keyframe para movimento reverso (apenas uma vez)
+            if (!document.getElementById('reverseStyle')) {
+                const styleSheet = document.createElement("style");
+                styleSheet.id = 'reverseStyle';
+                styleSheet.textContent = `
+                    @keyframes moveBubbleReverse{
+                        0%{
+                            transform:translateX(100px) translateY(var(--y-start));
+                            opacity:0;
+                        }
+                        5%{
+                            opacity:var(--opacity);
+                        }
+                        95%{
+                            opacity:var(--opacity);
+                        }
+                        100%{
+                            transform:translateX(calc(-100vw - 100px)) translateY(var(--y-end));
+                            opacity:0;
+                        }
+                    }
+                `;
+                document.head.appendChild(styleSheet);
+            }
+        }
+        
+        bubblesContainer.appendChild(bubble);
+    }
+}
+
+// FUNÇÃO DO MENU COM ANIMAÇÃO
+function toggleMenu(){
+let menu = document.getElementById("menu")
+
+if(menu.classList.contains("show")){
+    menu.classList.remove("show");
+    // Fechar dropdown também
+    document.getElementById('dropdownContent').classList.remove('show');
+    document.querySelector('.dropdown-btn').classList.remove('active');
+    setTimeout(() => {
+        if(!menu.classList.contains("show")){
+            menu.style.display = "none";
+        }
+    }, 400);
+}else{
+    menu.style.display = "block";
+    // Pequeno delay para a animação funcionar
+    setTimeout(() => {
+        menu.classList.add("show");
+    }, 10);
+}
+}
+
+// FUNÇÕES PARA ABRIR OS CANAIS
+function abrirCanal1(){
+window.open("https://youtube.com/@gtvzmodded-7?si=NLtaOGasGcr6qSR3", "_blank");
+}
+
+function abrirCanal2(){
+window.open("https://youtube.com/@gtxteam_psicopata?si=X2dOSofWDqWL6-yG", "_blank");
+}
+
+// FUNÇÃO PARA ABRIR O DISCORD
+function abrirDiscord(){
+window.open("https://discord.gg/SXtfYJSPny", "_blank");
+}
+
+// FUNÇÃO DOS BOTÕES DE DOWNLOAD EXECUTORES
+function baixar(versao){
+let linkDownload = "";
+
+switch(versao) {
+case "v1":
+linkDownload = "https://stanti.com.br/gtvzmodded";
+break;
+case "v2":
+linkDownload = "https://stanti.com.br/gtvzmm";
+break;
+case "v3":
+linkDownload = "https://stanti.com.br/gtvzmoddedoriginal";
+break;
+case "v4":
+linkDownload = "https://stanti.com.br/gtvzmoddedvngorginal";
+break;
+default:
+linkDownload = "https://stanti.com.br/gtvzmodded";
+}
+
+window.open(linkDownload, "_blank");
+}
+
+// FUNÇÃO DO BOTÃO ROBLOX LITE
+function baixarRoblox(){
+window.open("https://stanti.com.br/robloxlite", "_blank");
+}
+
+// FUNÇÃO PARA ABRIR/FECHAR DROPDOWN
+function toggleDropdown() {
+    const dropdown = document.getElementById('dropdownContent');
+    const btn = document.querySelector('.dropdown-btn');
+    dropdown.classList.toggle('show');
+    btn.classList.toggle('active');
+}
+
+// FUNÇÃO PARA SELECIONAR LINGUAGEM
+function selectLanguage(idioma) {
+    // Fechar dropdown
+    document.getElementById('dropdownContent').classList.remove('show');
+    document.querySelector('.dropdown-btn').classList.remove('active');
+    
+    // Remover selected de todas opções
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.remove('selected');
+    });
+    
+    // Adicionar selected na opção clicada
+    const options = document.querySelectorAll('.lang-option');
+    let selectedText = '';
+    
+    options.forEach((opt, index) => {
+        if ((idioma === 'pt' && index === 0) ||
+            (idioma === 'en' && index === 1) ||
+            (idioma === 'vi' && index === 2) ||
+            (idioma === 'de' && index === 3) ||
+            (idioma === 'ar' && index === 4)) {
+            opt.classList.add('selected');
+            selectedText = opt.textContent;
+        }
+    });
+    
+    // Atualizar texto do botão
+    document.getElementById('selectedLanguage').textContent = selectedText;
+    
+    // Atualizar idioma
+    mudarIdioma(idioma);
+}
+
+// FUNÇÃO PARA MUDAR IDIOMA
+function mudarIdioma(idioma) {
+    // Atualizar atributo lang do HTML
+    document.documentElement.lang = idioma;
+    
+    if (idioma === 'pt') {
+        // Textos em Português
+        document.getElementById('linkCanal1').textContent = 'CANAL GT_MINGUI';
+        document.getElementById('linkCanal2').textContent = 'CANAL GT_GTVZ MODDED';
+        document.getElementById('linkDiscord').textContent = 'DISCORD OFC';
+        document.getElementById('tituloPrincipal').textContent = 'GTVZ MODDED';
+        document.getElementById('descricaoPrincipal').textContent = 'ESSE SITE HOSPEDA TODOS SITE OFICIAL DO GTVZ MODDED';
+        document.getElementById('tituloCanais').textContent = 'MEUS CANAIS';
+        document.getElementById('inscreva1').textContent = 'SE-INSCREVA';
+        document.getElementById('inscreva2').textContent = 'SE-INSCREVA';
+        document.getElementById('executor1').textContent = 'SITE EXECUTO MODIFICADO NORMAL';
+        document.getElementById('executor2').textContent = 'SITE EXECUTO MODIFICADO VNG';
+        document.getElementById('executor3').textContent = 'SITE EXECUTO ORIGINAL';
+        document.getElementById('executor4').textContent = 'SITE EXECUTO ORIGINAL VNG';
+        document.getElementById('btnBaixar1').innerHTML = '⬇️ BAIXAR AGORA';
+        document.getElementById('btnBaixar2').innerHTML = '⬇️ BAIXAR AGORA';
+        document.getElementById('btnBaixar3').innerHTML = '⬇️ BAIXAR AGORA';
+        document.getElementById('btnBaixar4').innerHTML = '⬇️ BAIXAR AGORA';
+        document.getElementById('robloxTitulo').textContent = 'ROBLOX LITE';
+        document.getElementById('btnRoblox').innerHTML = '⬇️ BAIXAR ROBLOX LITE';
+        document.getElementById('footerTexto').textContent = 'GTVZ MODDED 2026 - Todos os direitos reservados';
+        
+    } else if (idioma === 'en') {
+        // Textos em Inglês
+        document.getElementById('linkCanal1').textContent = 'CHANNEL GT_MINGUI';
+        document.getElementById('linkCanal2').textContent = 'CHANNEL GT_GTVZ MODDED';
+        document.getElementById('linkDiscord').textContent = 'OFFICIAL DISCORD';
+        document.getElementById('tituloPrincipal').textContent = 'GTVZ MODDED';
+        document.getElementById('descricaoPrincipal').textContent = 'THIS SITE HOSTS ALL OFFICIAL GTVZ MODDED SITES';
+        document.getElementById('tituloCanais').textContent = 'MY CHANNELS';
+        document.getElementById('inscreva1').textContent = 'SUBSCRIBE';
+        document.getElementById('inscreva2').textContent = 'SUBSCRIBE';
+        document.getElementById('executor1').textContent = 'MODIFIED EXECUTOR SITE NORMAL';
+        document.getElementById('executor2').textContent = 'MODIFIED EXECUTOR SITE VNG';
+        document.getElementById('executor3').textContent = 'ORIGINAL EXECUTOR SITE';
+        document.getElementById('executor4').textContent = 'ORIGINAL EXECUTOR SITE VNG';
+        document.getElementById('btnBaixar1').innerHTML = '⬇️ DOWNLOAD NOW';
+        document.getElementById('btnBaixar2').innerHTML = '⬇️ DOWNLOAD NOW';
+        document.getElementById('btnBaixar3').innerHTML = '⬇️ DOWNLOAD NOW';
+        document.getElementById('btnBaixar4').innerHTML = '⬇️ DOWNLOAD NOW';
+        document.getElementById('robloxTitulo').textContent = 'ROBLOX LITE';
+        document.getElementById('btnRoblox').innerHTML = '⬇️ DOWNLOAD ROBLOX LITE';
+        document.getElementById('footerTexto').textContent = 'GTVZ MODDED 2026 - All rights reserved';
+        
+    } else if (idioma === 'vi') {
+        // Textos em Viátina
+        document.getElementById('linkCanal1').textContent = 'KÊNH GT_MINGUI';
+        document.getElementById('linkCanal2').textContent = 'KÊNH GT_GTVZ MODDED';
+        document.getElementById('linkDiscord').textContent = 'DISCORD CHÍNH THỨC';
+        document.getElementById('tituloPrincipal').textContent = 'GTVZ MODDED VIỆT NAM';
+        document.getElementById('descricaoPrincipal').textContent = 'TRANG NÀY LÀ TRANG CHÍNH THỨC CỦA GTVZ MODDED';
+        document.getElementById('tituloCanais').textContent = 'KÊNH CỦA TÔI';
+        document.getElementById('inscreva1').textContent = 'ĐĂNG KÝ';
+        document.getElementById('inscreva2').textContent = 'ĐĂNG KÝ';
+        document.getElementById('executor1').textContent = 'TRANG EXECUTOR MODIFIED NORMAL';
+        document.getElementById('executor2').textContent = 'TRANG EXECUTOR MODIFIED VNG';
+        document.getElementById('executor3').textContent = 'TRANG EXECUTOR ORIGINAL';
+        document.getElementById('executor4').textContent = 'TRANG EXECUTOR ORIGINAL VNG';
+        document.getElementById('btnBaixar1').innerHTML = '⬇️ TẢI XUỐNG';
+        document.getElementById('btnBaixar2').innerHTML = '⬇️ TẢI XUỐNG';
+        document.getElementById('btnBaixar3').innerHTML = '⬇️ TẢI XUỐNG';
+        document.getElementById('btnBaixar4').innerHTML = '⬇️ TẢI XUỐNG';
+        document.getElementById('robloxTitulo').textContent = 'ROBLOX LITE';
+        document.getElementById('btnRoblox').innerHTML = '⬇️ TẢI ROBLOX LITE';
+        document.getElementById('footerTexto').textContent = 'GTVZ MODDED 2026 - Tất cả các quyền được bảo lưu';
+        
+    } else if (idioma === 'de') {
+        // Textos em Alemão
+        document.getElementById('linkCanal1').textContent = 'KANAL GT_MINGUI';
+        document.getElementById('linkCanal2').textContent = 'KANAL GT_GTVZ MODDED';
+        document.getElementById('linkDiscord').textContent = 'OFFIZIELLER DISCORD';
+        document.getElementById('tituloPrincipal').textContent = 'GTVZ MODDED';
+        document.getElementById('descricaoPrincipal').textContent = 'DIESE SEITE HOSTET ALLE OFFIZIELLEN GTVZ MODDED SEITEN';
+        document.getElementById('tituloCanais').textContent = 'MEINE KANÄLE';
+        document.getElementById('inscreva1').textContent = 'ABONNIEREN';
+        document.getElementById('inscreva2').textContent = 'ABONNIEREN';
+        document.getElementById('executor1').textContent = 'MODIFIZIERTE EXECUTOR SEITE NORMAL';
+        document.getElementById('executor2').textContent = 'MODIFIZIERTE EXECUTOR SEITE VNG';
+        document.getElementById('executor3').textContent = 'ORIGINAL EXECUTOR SEITE';
+        document.getElementById('executor4').textContent = 'ORIGINAL EXECUTOR SEITE VNG';
+        document.getElementById('btnBaixar1').innerHTML = '⬇️ JETZT HERUNTERLADEN';
+        document.getElementById('btnBaixar2').innerHTML = '⬇️ JETZT HERUNTERLADEN';
+        document.getElementById('btnBaixar3').innerHTML = '⬇️ JETZT HERUNTERLADEN';
+        document.getElementById('btnBaixar4').innerHTML = '⬇️ JETZT HERUNTERLADEN';
+        document.getElementById('robloxTitulo').textContent = 'ROBLOX LITE';
+        document.getElementById('btnRoblox').innerHTML = '⬇️ ROBLOX LITE HERUNTERLADEN';
+        document.getElementById('footerTexto').textContent = 'GTVZ MODDED 2026 - Alle Rechte vorbehalten';
+        
+    } else if (idioma === 'ar') {
+        // Textos em Árabe
+        document.getElementById('linkCanal1').textContent = 'قناة GT_MINGUI';
+        document.getElementById('linkCanal2').textContent = 'قناة GT_GTVZ MODDED';
+        document.getElementById('linkDiscord').textContent = 'ديسكورد الرسمي';
+        document.getElementById('tituloPrincipal').textContent = 'GTVZ مودد';
+        document.getElementById('descricaoPrincipal').textContent = 'هذا الموقع يستضيف جميع المواقع الرسمية لـ GTVZ مودد';
+        document.getElementById('tituloCanais').textContent = 'قنواتي';
+        document.getElementById('inscreva1').textContent = 'اشترك';
+        document.getElementById('inscreva2').textContent = 'اشترك';
+        document.getElementById('executor1').textContent = 'موقع المنفذ المعدل العادي';
+        document.getElementById('executor2').textContent = 'موقع المنفذ المعدل VNG';
+        document.getElementById('executor3').textContent = 'موقع المنفذ الأصلي';
+        document.getElementById('executor4').textContent = 'موقع المنفذ الأصلي VNG';
+        document.getElementById('btnBaixar1').innerHTML = '⬇️ تحميل الآن';
+        document.getElementById('btnBaixar2').innerHTML = '⬇️ تحميل الآن';
+        document.getElementById('btnBaixar3').innerHTML = '⬇️ تحميل الآن';
+        document.getElementById('btnBaixar4').innerHTML = '⬇️ تحميل الآن';
+        document.getElementById('robloxTitulo').textContent = 'روبلوكس لايت';
+        document.getElementById('btnRoblox').innerHTML = '⬇️ تحميل روبلوكس لايت';
+        document.getElementById('footerTexto').textContent = 'GTVZ مودد 2026 - جميع الحقوق محفوظة';
+    }
+    
+    // Fechar o menu após selecionar o idioma
+    let menu = document.getElementById('menu');
+    menu.classList.remove('show');
+    setTimeout(() => {
+        menu.style.display = 'none';
+    }, 400);
+}
+
+// Fechar dropdown se clicar fora
+document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.language-dropdown');
+    const btn = document.querySelector('.dropdown-btn');
+    const content = document.getElementById('dropdownContent');
+    
+    if (dropdown && !dropdown.contains(event.target) && content.classList.contains('show')) {
+        content.classList.remove('show');
+        btn.classList.remove('active');
+    }
+});
+
+// INICIAR BOLHAS QUANDO A PÁGINA CARREGAR
+window.onload = function() {
+criarBubbles();
+
+// Inicializar com português ativo
+mudarIdioma('pt');
+}
+
+</script>
+
+</body>
+</html>

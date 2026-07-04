@@ -493,10 +493,11 @@
 
         <div class="tabs-menu" id="tabsMenu">
             <button class="tab-btn active" data-tab="tab5">ROBLOX LITE</button>
+            <button class="tab-btn" data-tab="tab8">EXECUTO LITE</button>
             <button class="tab-btn" data-tab="tab1">EXECUTOR GTVZ</button>
             <button class="tab-btn" data-tab="tab2">GTVZ VNG</button>
-            <button class="tab-btn" data-tab="tab3">ORIGINAL</button>
             <button class="tab-btn" data-tab="tab4">VNG</button>
+            <button class="tab-btn" data-tab="tab3">ORIGINAL</button>
             <button class="tab-btn" data-tab="tab6">EXECUTOR IPHONE</button>
             <button class="tab-btn" data-tab="tab7">OUTROS APK</button>
         </div>
@@ -508,6 +509,7 @@
         <div id="tab5" class="content-section"></div>
         <div id="tab6" class="content-section hidden"></div>
         <div id="tab7" class="content-section hidden"></div>
+        <div id="tab8" class="content-section hidden"></div>
 
         <div id="profileSection" class="profile-section hidden">
             <div class="profile-image" id="profileAvatar"></div>
@@ -587,11 +589,40 @@
 </div>
 
 <script>
-// ============================================
-// CONFIGURAÇÃO CENTRALIZADA DOS EXECUTORES
-// ============================================
-    
 const executoresConfig = {
+    tab5: {
+        titulo: "ROBLOX LITE",
+        itens: [
+            { nome: "ROBLOX SEMI LITE 32BITS⚪", link: "https://www.mediafire.com/download/rcuo78511mzc6ia" },
+            { nome: "ROBLOX SEMI LITE 64BITS⚪", link: "https://www.mediafire.com/download/k2gdrtvz8dpdv4u" },
+            { nome: "ROBLOX LITE 32BITS🟠", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ROBLOX LITE 64BITS🟠", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ROBLOX ULTRA LITE 32BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ROBLOX SEMI LITE X86_64BITS🟠", link: "https://www.mediafire.com/download/batfxnxcaaxvgju" },
+            { nome: "ROBLOX SAMSUNGGALAXY LITE 32BITS⚪", link: "https://www.mediafire.com/file/g45gecoi7meux3l/ROBLOX_SAMSUNGGALAXY_32BITS.apk/file" },
+            { nome: "ROBLOX SAMSUNGGALAXY LITE 64BITS⚪", link: "https://www.mediafire.com/file/4a2n3fn64k1m1g3/ROBLOX_SAMSUNGGALAXY_64BITS.apk/file" },
+            { nome: "RBXL RIOPLAY 32BITS🟠", link: "https://www.mediafire.com/download/p4nfu0c4tlu0tnd" }
+        ]
+    },
+    tab5vng: {
+        titulo: "ROBLOX VNG LITE",
+        itens: [
+            { nome: "ROBLOX VNG SEMI LITE 32BITS⚪", link: "https://www.mediafire.com/download/rcuo78511mzc6ia" },
+            { nome: "ROBLOX VNG SEMI LITE 64BITS⚪", link: "https://www.mediafire.com/download/k2gdrtvz8dpdv4u" },
+            { nome: "ROBLOX VNG LITE 32BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ROBLOX VNG LITE 64BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ROBLOX VNG ULTRA LITE 32BITS🟢", link: "https://www.mediafire.com/file/r7dl54cu0d8ny34/%25F0%259F%2587%25BB%25F0%259F%2587%25B3ROBLOX_VNG_LITE_32BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" }
+        ]
+    },
+    tab8: {
+        titulo: "EXECUTO LITE",
+        itens: [
+            { nome: "DELTA LITE 32BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "DELTA LITE 64BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "CODEX LITE 64BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
+            { nome: "ARCEUS LITE 64BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" }
+        ]
+    },
     tab1: {
         titulo: "EXECUTOR GTVZ",
         itens: [
@@ -607,6 +638,13 @@ const executoresConfig = {
             { nome: "DELTA VNG 64BITS🟢GT", link: "https://www.mediafire.com/file/3w76hnsy52ihs4h/🇻🇳DELTA+VNG+64BITS🇻🇳.apk/file" }
         ]
     },
+    tab4: {
+        titulo: "VNG",
+        itens: [
+            { nome: "DELTA VNG 64BITS", link: "https://cdn.gloopup.net/file/Delta-2.717.985-VN.apk" },
+            { nome: "ARCEUS VNG 64BITS", link: "https://www.mediafire.com/file/ran6ctu39v8yc37/Roblox.-.VNG.Arceus.X.NEO.2.1.6.apk/file" },
+        ]
+    },
     tab3: {
         titulo: "ORIGINAL",
         itens: [
@@ -615,37 +653,6 @@ const executoresConfig = {
             { nome: "CODEX 64BITS", link: "https://www.mediafire.com/file/a47kuryiguz7w2p/Codex+v2.726.apk/file" },
             { nome: "TRIGON 64BITS", link: "https://www.mediafire.com/file/mos3x43fzvlidub/2.724.735_trigon.apk/file" },
             { nome: "VACA X 64BITS", link: "https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk" }
-        ]
-    },
-    tab4: {
-        titulo: "VNG",
-        itens: [
-            { nome: "DELTA VNG 64BITS", link: "https://cdn.gloopup.net/file/Delta-2.717.985-VN.apk" },
-            { nome: "ARCEUS VNG 64BITS", link: "https://www.mediafire.com/file/ran6ctu39v8yc37/Roblox.-.VNG.Arceus.X.NEO.2.1.6.apk/file" },
-        ]
-    },
-    tab5: {
-        titulo: "ROBLOX LITE",
-        itens: [
-            { nome: "ROBLOX SEMI LITE 32BITS🟢", link: "https://www.mediafire.com/download/rcuo78511mzc6ia" },
-            { nome: "ROBLOX SEMI LITE 64BITS🟢", link: "https://www.mediafire.com/download/k2gdrtvz8dpdv4u" },
-            { nome: "ROBLOX LITE 32BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX LITE 64BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX ULTRA LITE 32BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX SEMI LITE X86_64BITS🟢", link: "https://www.mediafire.com/download/batfxnxcaaxvgju" },
-            { nome: "ROBLOX SAMSUNGGALAXY LITE 32BITS🟢", link: "https://www.mediafire.com/file/g45gecoi7meux3l/ROBLOX_SAMSUNGGALAXY_32BITS.apk/file" },
-            { nome: "ROBLOX SAMSUNGGALAXY LITE 64BITS🟢", link: "https://www.mediafire.com/file/4a2n3fn64k1m1g3/ROBLOX_SAMSUNGGALAXY_64BITS.apk/file" },
-            { nome: "RBXL RIOPLAY 32BITS🟢", link: "https://www.mediafire.com/download/p4nfu0c4tlu0tnd" }
-        ]
-    },
-    tab5vng: {
-        titulo: "ROBLOX VNG LITE",
-        itens: [
-            { nome: "ROBLOX VNG SEMI LITE 32BITS⚪", link: "https://www.mediafire.com/download/rcuo78511mzc6ia" },
-            { nome: "ROBLOX VNG SEMI LITE 64BITS⚪", link: "https://www.mediafire.com/download/k2gdrtvz8dpdv4u" },
-            { nome: "ROBLOX VNG LITE 32BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX VNG LITE 64BITS⚪", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX VNG ULTRA LITE 32BITS🟢", link: "https://www.mediafire.com/file/r7dl54cu0d8ny34/%25F0%259F%2587%25BB%25F0%259F%2587%25B3ROBLOX_VNG_LITE_32BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" }
         ]
     },
     tab6: {
@@ -672,16 +679,10 @@ const executoresConfig = {
     }
 };
 
-// ============================================
-// FUNÇÕES DE RENDERIZAÇÃO COM ANIMAÇÃO
-// ============================================
-
 function renderizarConteudo() {
-    // Renderizar tab5 (ROBLOX LITE)
     const containerTab5 = document.getElementById('tab5');
     if (containerTab5) {
         containerTab5.innerHTML = '';
-        
         const configLite = executoresConfig.tab5;
         configLite.itens.forEach(item => {
             const card = document.createElement('div');
@@ -702,7 +703,6 @@ function renderizarConteudo() {
             `;
             containerTab5.appendChild(card);
         });
-        
         const divider = document.createElement('div');
         divider.style.width = '100%';
         divider.style.height = '2px';
@@ -710,7 +710,6 @@ function renderizarConteudo() {
         divider.style.margin = '20px 0';
         divider.style.borderRadius = '2px';
         containerTab5.appendChild(divider);
-        
         const configVng = executoresConfig.tab5vng;
         configVng.itens.forEach(item => {
             const card = document.createElement('div');
@@ -732,16 +731,36 @@ function renderizarConteudo() {
             containerTab5.appendChild(card);
         });
     }
-    
-    // Renderizar outras tabs (sem bio)
+    const containerTab8 = document.getElementById('tab8');
+    if (containerTab8) {
+        containerTab8.innerHTML = '';
+        const config = executoresConfig.tab8;
+        config.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${config.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab8.appendChild(card);
+        });
+    }
     for (let tabId in executoresConfig) {
-        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7') continue;
+        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7' || tabId === 'tab8') continue;
         const container = document.getElementById(tabId);
         if (!container) continue;
-        
         const config = executoresConfig[tabId];
         container.innerHTML = '';
-        
         config.itens.forEach(item => {
             const card = document.createElement('div');
             card.className = 'download-card';
@@ -762,8 +781,6 @@ function renderizarConteudo() {
             container.appendChild(card);
         });
     }
-    
-    // Renderizar tab7 (OUTROS APK - COM BIO)
     const containerTab7 = document.getElementById('tab7');
     if (containerTab7) {
         containerTab7.innerHTML = '';
@@ -799,7 +816,8 @@ const tabContents = {
     'tab4': document.getElementById('tab4'),
     'tab5': document.getElementById('tab5'),
     'tab6': document.getElementById('tab6'),
-    'tab7': document.getElementById('tab7')
+    'tab7': document.getElementById('tab7'),
+    'tab8': document.getElementById('tab8')
 };
 const profileSection = document.getElementById('profileSection');
 const navHome = document.getElementById('nav-home');

@@ -623,6 +623,13 @@ const executoresConfig = {
             { nome: "ARCEUS LITE 64BITS🟢GT", link: "https://www.mediafire.com/file/d8937p5pljrw9ae/%25F0%259F%25A4%25A1ARCEUS_LITE_64BITS%25F0%259F%25A4%25A1.apk/file" }
         ]
     },
+    tab8vng: {
+        titulo: "EXECUTO LITE VNG",
+        itens: [
+            { nome: "DELTA VNG LITE 32BITS🟠GT", link: "https://www.mediafire.com/file/wadl68kaa915ns5/🇻🇳DELTA+VNG+32BITS🇻🇳.apk/file" },
+            { nome: "DELTA VNG LITE 64BITS🟠GT", link: "https://www.mediafire.com/file/3w76hnsy52ihs4h/🇻🇳DELTA+VNG+64BITS🇻🇳.apk/file" }
+        ]
+    },
     tab1: {
         titulo: "EXECUTOR GTVZ",
         itens: [
@@ -634,8 +641,8 @@ const executoresConfig = {
     tab2: {
         titulo: "GTVZ VNG",
         itens: [
-            { nome: "DELTA VNG 32BITS🟠GT", link: "https://www.mediafire.com/file/wadl68kaa915ns5/🇻🇳DELTA+VNG+32BITS🇻🇳.apk/file" },
-            { nome: "DELTA VNG 64BITS🟠GT", link: "https://www.mediafire.com/file/3w76hnsy52ihs4h/🇻🇳DELTA+VNG+64BITS🇻🇳.apk/file" }
+            { nome: "DELTA VNG 32BITS🟢GT", link: "https://www.mediafire.com/file/lzsjzprcw5bxfvu/🇻🇳DELTA+VNG+32BITS🇻🇳.apk/file" },
+            { nome: "DELTA VNG 64BITS🟢GT", link: "https://www.mediafire.com/file/s1va6fxqkf9wxmt/🇻🇳DELTA+VNG+64BITS🇻🇳.apk/file" }
         ]
     },
     tab4: {
@@ -680,6 +687,7 @@ const executoresConfig = {
 };
 
 function renderizarConteudo() {
+    // Tab 5 (Roblox Lite + VNG)
     const containerTab5 = document.getElementById('tab5');
     if (containerTab5) {
         containerTab5.innerHTML = '';
@@ -731,17 +739,46 @@ function renderizarConteudo() {
             containerTab5.appendChild(card);
         });
     }
+    
+    // Tab 8 (Executo Lite + VNG)
     const containerTab8 = document.getElementById('tab8');
     if (containerTab8) {
         containerTab8.innerHTML = '';
-        const config = executoresConfig.tab8;
-        config.itens.forEach(item => {
+        const configLite = executoresConfig.tab8;
+        configLite.itens.forEach(item => {
             const card = document.createElement('div');
             card.className = 'download-card';
             card.innerHTML = `
                 <div class="card-body">
                     <div class="card-info">
-                        <div class="card-category"><span></span> ${config.titulo}</div>
+                        <div class="card-category"><span></span> ${configLite.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab8.appendChild(card);
+        });
+        const divider = document.createElement('div');
+        divider.style.width = '100%';
+        divider.style.height = '2px';
+        divider.style.background = 'linear-gradient(90deg, transparent, #00FFB2, #00FFB2, #00FFB2, #00FFB2, transparent)';
+        divider.style.margin = '20px 0';
+        divider.style.borderRadius = '2px';
+        containerTab8.appendChild(divider);
+        const configVng = executoresConfig.tab8vng;
+        configVng.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${configVng.titulo}</div>
                         <div class="card-title">${item.nome}</div>
                     </div>
                     <div class="download-btn" onclick="baixar('${item.link}')">
@@ -755,8 +792,10 @@ function renderizarConteudo() {
             containerTab8.appendChild(card);
         });
     }
+    
+    // Demais tabs
     for (let tabId in executoresConfig) {
-        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7' || tabId === 'tab8') continue;
+        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7' || tabId === 'tab8' || tabId === 'tab8vng') continue;
         const container = document.getElementById(tabId);
         if (!container) continue;
         const config = executoresConfig[tabId];
@@ -781,6 +820,7 @@ function renderizarConteudo() {
             container.appendChild(card);
         });
     }
+    // Tab7
     const containerTab7 = document.getElementById('tab7');
     if (containerTab7) {
         containerTab7.innerHTML = '';

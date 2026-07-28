@@ -494,6 +494,7 @@
         <div class="tabs-menu" id="tabsMenu">
             <button class="tab-btn active" data-tab="tab5">ROBLOX LITE</button>
             <button class="tab-btn" data-tab="tab8">EXECUTO LITE</button>
+            <button class="tab-btn" data-tab="tab9">EXECUTO MINE</button>
             <button class="tab-btn" data-tab="tab1">EXECUTOR GTVZ</button>
             <button class="tab-btn" data-tab="tab2">GTVZ VNG-BR</button>
             <button class="tab-btn" data-tab="tab4">VNG</button>
@@ -510,6 +511,7 @@
         <div id="tab6" class="content-section hidden"></div>
         <div id="tab7" class="content-section hidden"></div>
         <div id="tab8" class="content-section hidden"></div>
+        <div id="tab9" class="content-section hidden"></div>
 
         <div id="profileSection" class="profile-section hidden">
             <div class="profile-image" id="profileAvatar"></div>
@@ -617,8 +619,8 @@ const executoresConfig = {
     tab8: {
         titulo: "EXECUTO LITE",
         itens: [
-            { nome: "DELTA LITE 32BITS🔵GT", link: "https://www.mediafire.com/file/szhtg1r45c60w8d/🤡DELTA+LITE+32BITS🤡.apk/file" },
-            { nome: "DELTA LITE 64BITS🔵GT", link: "https://www.mediafire.com/file/mgw9nyluwljdbqu/🤡DELTA+LITE+64BITS🤡.apk/file" },
+            { nome: "DELTA LITE 32BITS🟢GT", link: "https://www.mediafire.com/file/9ha5tlrg8a1vfdz/🤡DELTA+LITE+32BITS🤡.apk/file" },
+            { nome: "DELTA LITE 64BITS🟢GT", link: "https://www.mediafire.com/file/6ecq3a3m3d6fs5l/🤡DELTA+LITE+64BITS🤡.apk/file" },
             { nome: "ARCEUS LITE 64BITS🟢GT", link: "https://www.mediafire.com/file/yosrpup0v1jeygt/🤡ARCEUS+LITE+64BITS🤡.apk/file" },
             { nome: "DELTA RIOPLAY LITE 32BITS🟢GT", link: "https://www.mediafire.com/file/smih3nh80x2btsz/DELTA+LITE+RIOPLAY+(SS)(32).apk/file" }
         ]
@@ -629,6 +631,14 @@ const executoresConfig = {
             { nome: "DELTA VNG-BR LITE 32BITS🟢GT", link: "https://www.mediafire.com/file/vtxv2judvzdm47w/🇧🇷DELTA+VNG-BR+LITE+32BITS🇻🇳.apk/file" },
             { nome: "DELTA VNG-BR LITE 64BITS🟢GT", link: "https://www.mediafire.com/file/gdi1iirjq31x940/%25F0%259F%2587%25A7%25F0%259F%2587%25B7DELTA_VNG-BR_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
             { nome: "ARCEUS VNG-BR LITE 64BITS🟢GT", link: "https://www.mediafire.com/file/f1w2fiyvemgbahg/🇧🇷ARCEUS+VNG-BR+LITE+64BITS🇻🇳.apk/file" }
+        ]
+    },
+    tab9: {
+        titulo: "EXECUTO MINE",
+        itens: [
+            { nome: "DELTA MINE 32BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_MINE_32.apk/file" },
+            { nome: "DELTA MINE 64BITS🟠GT", link: "https://www.mediafire.com/file/EXEMPLO_MINE_64.apk/file" },
+            { nome: "ARCEUS MINE 64BITS⚪GT", link: "https://www.mediafire.com/file/EXEMPLO_ARCEUS_MINE.apk/file" }
         ]
     },
     tab1: {
@@ -794,10 +804,36 @@ function renderizarConteudo() {
             containerTab8.appendChild(card);
         });
     }
+
+    // Tab 9 (Executo Mine)
+    const containerTab9 = document.getElementById('tab9');
+    if (containerTab9) {
+        containerTab9.innerHTML = '';
+        const config = executoresConfig.tab9;
+        config.itens.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'download-card';
+            card.innerHTML = `
+                <div class="card-body">
+                    <div class="card-info">
+                        <div class="card-category"><span></span> ${config.titulo}</div>
+                        <div class="card-title">${item.nome}</div>
+                    </div>
+                    <div class="download-btn" onclick="baixar('${item.link}')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                        </svg>
+                        DOWNLOAD
+                    </div>
+                </div>
+            `;
+            containerTab9.appendChild(card);
+        });
+    }
     
     // Demais tabs
     for (let tabId in executoresConfig) {
-        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7' || tabId === 'tab8' || tabId === 'tab8vng') continue;
+        if (tabId === 'tab5' || tabId === 'tab5vng' || tabId === 'tab7' || tabId === 'tab8' || tabId === 'tab8vng' || tabId === 'tab9') continue;
         const container = document.getElementById(tabId);
         if (!container) continue;
         const config = executoresConfig[tabId];
@@ -859,7 +895,8 @@ const tabContents = {
     'tab5': document.getElementById('tab5'),
     'tab6': document.getElementById('tab6'),
     'tab7': document.getElementById('tab7'),
-    'tab8': document.getElementById('tab8')
+    'tab8': document.getElementById('tab8'),
+    'tab9': document.getElementById('tab9')
 };
 const profileSection = document.getElementById('profileSection');
 const navHome = document.getElementById('nav-home');

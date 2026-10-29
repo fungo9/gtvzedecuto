@@ -544,7 +544,6 @@
         <div class="tabs-menu" id="tabsMenu">
             <button class="tab-btn active" data-tab="tab5">ROBLOX LITE</button>
             <button class="tab-btn" data-tab="tab8">EXECUTO LITE</button>
-            <button class="tab-btn" data-tab="tab9">EXECUTO MINE</button>
             <button class="tab-btn" data-tab="tab1">EXECUTOR GTVZ</button>
             <button class="tab-btn" data-tab="tab2">GTVZ VNG-BR</button>
             <button class="tab-btn" data-tab="tab4">VNG</button>
@@ -561,7 +560,6 @@
         <div id="tab6" class="content-section hidden"></div>
         <div id="tab7" class="content-section hidden"></div>
         <div id="tab8" class="content-section hidden"></div>
-        <div id="tab9" class="content-section hidden"></div>
 
         <div id="profileSection" class="profile-section hidden">
             <div class="profile-image" id="profileAvatar"></div>
@@ -675,13 +673,6 @@ const executoresConfig = {
             { nome: "ARCEUS VNG-BR LITE 64BITS🟠🔓GT", link: "https://www.mediafire.com/file/f1w2fiyvemgbahg/🇧🇷ARCEUS+VNG-BR+LITE+64BITS🇻🇳.apk/file" }
         ]
     },
-    tab9: {
-        titulo: "EXECUTO MINE",
-        itens: [
-            { nome: "DELTA MINE 64BITS🔴GT", link: "https://www.mediafire.com/file/tmjuywdmwq6ypj0/%25E2%259B%258F%25EF%25B8%258FDELTA_MINE_64BITS%25E2%259B%258F%25EF%25B8%258F.apk/file" },
-            { nome: "ARCEUS MINE 64BITS🔴🔓GT", link: "https://www.mediafire.com/file/dj219twt6jd9016/%25E2%259B%258F%25EF%25B8%258FARCEUS_MINE_64BITS%25E2%259B%258F%25EF%25B8%258F.apk/file" }
-        ]
-    },
     tab1: {
         titulo: "EXECUTOR GTVZ",
         itens: [
@@ -708,8 +699,6 @@ const executoresConfig = {
             { nome: "DELTA 32BITS 64BITS", link: "https://delta.filenetwork.vip/android.html" },
             { nome: "ARCEUS 64BITS", link: "https://www.mediafire.com/file/kdptjdrnew4jozo/Roblox.Arceus.X.NEO.2.3.8.apk/file" },
             { nome: "LIME 64BITS", link: "https://www.mediafire.com/file/w4py9ayt6wpxu56/Lime+2.741.1061.apk/file" },
-            { nome: "CODEX 64BITS", link: "https://www.mediafire.com/file/2vcq4h8gk516qbq/Codex+v2.731.944.apk/file?dkey=ynyxb3gc09n&r=1738" },
-            { nome: "TRIGON 64BITS", link: "https://www.mediafire.com/file/qz1e8szhyvnnisv/com.roblox.client_2.730.790_trigon.apk/file" },
             { nome: "VACA X 64BITS", link: "https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk" }
         ]
     },
@@ -810,8 +799,7 @@ function renderizarConteudo() {
         'tab5': document.getElementById('tab5'),
         'tab6': document.getElementById('tab6'),
         'tab7': document.getElementById('tab7'),
-        'tab8': document.getElementById('tab8'),
-        'tab9': document.getElementById('tab9')
+        'tab8': document.getElementById('tab8')
     };
 
     for (let id in tabContents) {
@@ -836,7 +824,7 @@ function renderizarConteudo() {
         executoresConfig.tab8vng.itens.forEach(item => tab8.appendChild(criarCard(executoresConfig.tab8vng.titulo, item)));
     }
 
-    const abasSimples = ['tab1', 'tab2', 'tab3', 'tab4', 'tab6', 'tab7', 'tab9'];
+    const abasSimples = ['tab1', 'tab2', 'tab3', 'tab4', 'tab6', 'tab7'];
     abasSimples.forEach(id => {
         if (executoresConfig[id] && tabContents[id]) {
             executoresConfig[id].itens.forEach(item => tabContents[id].appendChild(criarCard(executoresConfig[id].titulo, item)));
@@ -845,7 +833,7 @@ function renderizarConteudo() {
 }
 
 const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
-const tabOrder = ['tab5', 'tab8', 'tab9', 'tab1', 'tab2', 'tab4', 'tab3', 'tab6', 'tab7'];
+const tabOrder = ['tab5', 'tab8', 'tab1', 'tab2', 'tab4', 'tab3', 'tab6', 'tab7'];
 let currentTabId = 'tab5';
 
 const tabContents = {
@@ -856,8 +844,7 @@ const tabContents = {
     'tab5': document.getElementById('tab5'),
     'tab6': document.getElementById('tab6'),
     'tab7': document.getElementById('tab7'),
-    'tab8': document.getElementById('tab8'),
-    'tab9': document.getElementById('tab9')
+    'tab8': document.getElementById('tab8')
 };
 const profileSection = document.getElementById('profileSection');
 const navHome = document.getElementById('nav-home');

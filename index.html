@@ -32,7 +32,6 @@
             min-height: -webkit-fill-available;
             overflow-x: hidden;
             background-color: #000000;
-            /* Gradient estritamente verde escuro e preto */
             background: linear-gradient(-45deg, #000000, #03170c, #000804, #052614, #020e07, #000000);
             background-size: 400% 400%;
             animation: gradientBg 10s ease infinite;
@@ -82,22 +81,54 @@
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        @keyframes gtvzSpecialAnim {
+            0% {
+                transform: scale(1) rotate(0deg);
+                text-shadow: 0 0 10px rgba(34, 197, 94, 0.3), 0 0 20px rgba(34, 197, 94, 0.1);
+            }
+            25% {
+                transform: scale(1.08) rotate(4deg);
+                text-shadow: 0 0 25px rgba(34, 197, 94, 0.8), 0 0 45px rgba(34, 197, 94, 0.5);
+            }
+            50% {
+                transform: scale(1.12) rotate(0deg);
+                text-shadow: 0 0 35px rgba(34, 197, 94, 1), 0 0 60px rgba(34, 197, 94, 0.7);
+            }
+            75% {
+                transform: scale(1.08) rotate(-4deg);
+                text-shadow: 0 0 25px rgba(34, 197, 94, 0.8), 0 0 45px rgba(34, 197, 94, 0.5);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                text-shadow: 0 0 10px rgba(34, 197, 94, 0.3), 0 0 20px rgba(34, 197, 94, 0.1);
+            }
         }
 
         .header h2 {
             font-size: 32px;
             font-weight: 700;
-            line-height: 36px;
+            line-height: 38px;
             font-family: Nunito, Poppins, sans-serif;
             color: #FAFAFA;
+            text-align: center;
+            display: inline-block;
+            animation: gtvzSpecialAnim 4s infinite ease-in-out;
+            transform-origin: center center;
         }
         .header h2 span { font-weight: 600; color: #15803d; }
         
         .avatar {
-            width: 59px;
-            height: 59px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             background: url('https://i.postimg.cc/Y2WnL1m6/file-000000002b28720e841d300bdbfe0f7e.png') 0% 0% / cover;
             border: 2px solid #0f5128;
@@ -107,11 +138,13 @@
         .tabs-menu {
             display: flex;
             gap: 8px;
-            margin: 32px 0 24px 0;
+            margin: 16px 0 24px 0;
             border-bottom: 1px solid rgba(15, 81, 40, 0.4);
             padding-bottom: 12px;
             overflow-x: auto;
             white-space: nowrap;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
         .tab-btn {
             font-size: 13px;
@@ -123,6 +156,7 @@
             transition: 0.2s;
             background: transparent;
             -webkit-tap-highlight-color: transparent;
+            flex-shrink: 0;
         }
         .tab-btn:hover {
             color: rgba(250, 250, 250, 0.8);
@@ -270,6 +304,145 @@
             width: 18px;
             height: 18px;
             pointer-events: none;
+        }
+
+        /* Estilo para a Seção Converte VNG */
+        .converter-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(3, 23, 12, 0.7);
+            border-radius: 22px;
+            border: 1px solid rgba(21, 128, 61, 0.4);
+            backdrop-filter: blur(10px);
+            margin-top: 10px;
+        }
+
+        .converter-warning {
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.6;
+            text-align: center;
+            font-weight: 400;
+            background: rgba(5, 38, 20, 0.5);
+            padding: 16px;
+            border-radius: 14px;
+            border-left: 4px solid #22c55e;
+            width: 100%;
+        }
+
+        .giant-download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 400px;
+            padding: 18px 30px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #22c55e 0%, #15803d 50%, #052614 100%);
+            border: 2px solid #4ade80;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+            animation: pulseGlow 2s infinite ease-in-out;
+            transition: transform 0.15s ease;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .giant-download-btn.pressed {
+            transform: scale(0.92) !important;
+            box-shadow: none !important;
+            transition: transform 0.05s ease !important;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 0 30px rgba(34, 197, 94, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+            }
+        }
+
+        .giant-download-btn svg {
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+
+        /* Caixa de Tutorial Estilizada com Animação no Texto */
+        .tutorial-box {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 100, 50, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tutorial-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #22c55e;
+            text-align: center;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .tutorial-step {
+            font-size: 12px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-weight: 400;
+        }
+
+        .tutorial-step span {
+            color: #22c55e;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Animação especial piscando/brilhando no texto */
+        @keyframes textGlowAnim {
+            0% {
+                color: #22c55e;
+                text-shadow: 0 0 2px rgba(34, 197, 94, 0.2);
+            }
+            50% {
+                color: #4ade80;
+                text-shadow: 0 0 10px rgba(34, 197, 94, 0.8), 0 0 20px rgba(34, 197, 94, 0.4);
+            }
+            100% {
+                color: #22c55e;
+                text-shadow: 0 0 2px rgba(34, 197, 94, 0.2);
+            }
+        }
+
+        .animated-tutorial-text {
+            animation: textGlowAnim 3s infinite ease-in-out;
+            font-weight: 600;
         }
 
         .profile-section {
@@ -471,12 +644,11 @@
             position: fixed;
             max-width: 960px;
             flex-direction: row;
-            padding: 0 30px calc(12px + env(safe-area-inset-bottom));
+            padding: 0 20px calc(12px + env(safe-area-inset-bottom));
             transform: translateX(-50%);
             backdrop-filter: blur(12px);
             border-top: 1px solid rgba(21, 128, 61, 0.3);
-            justify-content: center;
-            gap: 60px;
+            justify-content: space-around;
             background-color: #000000;
         }
         .nav-item {
@@ -513,13 +685,13 @@
 
         @media (max-width: 600px) {
             .container { padding: 0 16px; }
-            .header h2 { font-size: 24px; }
-            .avatar { width: 45px; height: 45px; }
+            .header h2 { font-size: 22px; }
+            .avatar { width: 42px; height: 42px; }
             .card-title { font-size: 14px; }
             .download-btn { padding: 8px 16px; font-size: 12px; }
             .nav-item p { font-size: 8px; }
             .tab-btn { font-size: 11px; padding: 6px 14px; }
-            .bottom-nav { gap: 40px; padding: 0 20px calc(10px + env(safe-area-inset-bottom)); }
+            .bottom-nav { padding: 0 10px calc(10px + env(safe-area-inset-bottom)); }
             .profile-image { width: 90px; height: 90px; }
             .profile-name { font-size: 22px; }
             .custom-bio p { font-size: 10px; }
@@ -530,6 +702,10 @@
             .profile-social-link { padding: 6px 12px; flex: 1 1 140px; }
             .profile-social-text { font-size: 10px; }
             .card-bio { font-size: 9px; }
+            .giant-download-btn { font-size: 15px; padding: 14px 20px; }
+            .converter-warning { font-size: 12px; }
+            .tutorial-box { padding: 16px; }
+            .tutorial-step { font-size: 11px; }
         }
     </style>
 </head>
@@ -545,21 +721,42 @@
             <button class="tab-btn active" data-tab="tab5">ROBLOX LITE</button>
             <button class="tab-btn" data-tab="tab8">EXECUTO LITE</button>
             <button class="tab-btn" data-tab="tab1">EXECUTOR GTVZ</button>
-            <button class="tab-btn" data-tab="tab2">GTVZ VNG-BR</button>
-            <button class="tab-btn" data-tab="tab4">VNG</button>
             <button class="tab-btn" data-tab="tab3">ORIGINAL</button>
             <button class="tab-btn" data-tab="tab6">EXECUTOR IPHONE</button>
             <button class="tab-btn" data-tab="tab7">OUTROS APK</button>
         </div>
 
         <div id="tab1" class="content-section hidden"></div>
-        <div id="tab2" class="content-section hidden"></div>
         <div id="tab3" class="content-section hidden"></div>
-        <div id="tab4" class="content-section hidden"></div>
         <div id="tab5" class="content-section"></div>
         <div id="tab6" class="content-section hidden"></div>
         <div id="tab7" class="content-section hidden"></div>
         <div id="tab8" class="content-section hidden"></div>
+        
+        <!-- Seção Converte VNG -->
+        <div id="tabConverter" class="content-section hidden">
+            <div class="converter-container">
+                <div class="converter-warning">
+                    ⚠️ ESSE ROBLOX CONVERTE CONTA DO VN PRA ROBLOX NORMAL LIBERANDO ACESSO DA SUA CONTA PRA ROBLOX NORMAL
+                </div>
+                <!-- Botão de Download Grande -->
+                <button type="button" class="giant-download-btn" id="btnDownloadConversor">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2M7 11l5 5 5-5M12 4v12"/>
+                    </svg>
+                    BAIXAR CONVERSOR VNG
+                </button>
+
+                <!-- Quadro de Tutorial com Texto Animado -->
+                <div class="tutorial-box">
+                    <div class="tutorial-title animated-tutorial-text">TUTORIAL DE USO</div>
+                    <div class="tutorial-step"><span>1.</span> INSTALAR O APK CONVERSOR</div>
+                    <div class="tutorial-step"><span>2.</span> ENTRA NO APK, FAZ LOGIN NA SUA CONTA QUE É DO VN E LOGA</div>
+                    <div class="tutorial-step"><span>3.</span> DEPOIS DE FAZER LOGIN, ACEITAR OS TERMOS</div>
+                    <div class="tutorial-step"><span>4.</span> DEPOIS DISSO É SÓ DESINSTALAR O APK CONVERSOR E ENTRAR PELO ROBLOX OU EXECUTO NORMAL</div>
+                </div>
+            </div>
+        </div>
 
         <div id="profileSection" class="profile-section hidden">
             <div class="profile-image" id="profileAvatar"></div>
@@ -621,14 +818,23 @@
         </div>
     </div>
 
+    <!-- Barra de Navegação Inferior -->
     <div class="bottom-nav">
         <div class="nav-item active" id="nav-home">
-            <svg width="39" height="36" viewBox="0 0 39 36" fill="none"><path d="M15.2562 33.8385V23.0309H23.7344V33.8385C23.7344 35.0273 24.6882 36 25.8539 36H32.2126C33.3783 36 34.3321 35.0273 34.3321 33.8385V18.7079H37.9354C38.9104 18.7079 39.3767 17.4758 38.6348 16.8274L20.9154 0.551186C20.11 -0.183729 18.8806 -0.183729 18.0752 0.551186L0.35577 16.8274C-0.364876 17.4758 0.0802291 18.7079 1.05522 18.7079H4.65845V33.8385C4.65845 35.0273 5.61225 36 6.778 36H13.1366C14.3024 36 15.2562 35.0273 15.2562 33.8385Z" fill="#16a34a"></path></svg>
+            <svg width="22" height="22" viewBox="0 0 39 36" fill="none"><path d="M15.2562 33.8385V23.0309H23.7344V33.8385C23.7344 35.0273 24.6882 36 25.8539 36H32.2126C33.3783 36 34.3321 35.0273 34.3321 33.8385V18.7079H37.9354C38.9104 18.7079 39.3767 17.4758 38.6348 16.8274L20.9154 0.551186C20.11 -0.183729 18.8806 -0.183729 18.0752 0.551186L0.35577 16.8274C-0.364876 17.4758 0.0802291 18.7079 1.05522 18.7079H4.65845V33.8385C4.65845 35.0273 5.61225 36 6.778 36H13.1366C14.3024 36 15.2562 35.0273 15.2562 33.8385Z" fill="#16a34a"></path></svg>
             <div class="nav-indicator"></div>
             <p>PRINCIPAL</p>
         </div>
+        <div class="nav-item" id="nav-converter">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/>
+            </svg>
+            <div class="nav-indicator" style="display:none;"></div>
+            <p>CONVERTER</p>
+        </div>
         <div class="nav-item" id="nav-perfil">
-            <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.19999 0C2.8745 0 1.79999 1.07452 1.79999 2.4C1.79999 3.72548 2.8745 4.8 4.19999 4.8C5.52547 4.8 6.59999 3.72548 6.59999 2.4C6.59999 1.07452 5.52547 0 4.19999 0Z" fill="#fafafa"></path><path d="M4.5 6C2.99813 6 0 6.67 0 8V8.5C0 8.775 0.253125 9 0.5625 9H8.4375C8.74687 9 9 8.775 9 8.5V8C9 6.67 6.00187 6 4.5 6Z" fill="#fafafa"></path></svg>
+            <svg width="22" height="22" viewBox="0 0 9 9" fill="none"><path d="M4.19999 0C2.8745 0 1.79999 1.07452 1.79999 2.4C1.79999 3.72548 2.8745 4.8 4.19999 4.8C5.52547 4.8 6.59999 3.72548 6.59999 2.4C6.59999 1.07452 5.52547 0 4.19999 0Z" fill="#fafafa"></path><path d="M4.5 6C2.99813 6 0 6.67 0 8V8.5C0 8.775 0.253125 9 0.5625 9H8.4375C8.74687 9 9 8.775 9 8.5V8C9 6.67 6.00187 6 4.5 6Z" fill="#fafafa"></path></svg>
+            <div class="nav-indicator" style="display:none;"></div>
             <p>PERFIL</p>
         </div>
     </div>
@@ -649,13 +855,12 @@ const executoresConfig = {
         ]
     },
     tab5vng: {
-        titulo: "ROBLOX LITE VNG-BR",
+        titulo: "ROBLOX LITE VNG",
         itens: [
-            { nome: "ROBLOX VNG-BR SEMI LITE 32BITS🟠", link: "https://www.mediafire.com/file/s8czvymd462ior1/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_SEMI_LITE_32BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
-            { nome: "ROBLOX VNG-BR SEMI LITE 64BIT⚪", link: "https://www.mediafire.com/file/g2lfih9f4vzqpsi/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_SEMI_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
-            { nome: "ROBLOX VNG-BR LITE 32BITS🟠", link: "https://www.mediafire.com/file/EXEMPLO_AUTO_FARM.lua/file" },
-            { nome: "ROBLOX VNG-BR LITE 64BITS⚪", link: "https://www.mediafire.com/file/nbp4y2hkghn39gj/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
-            { nome: "ROBLOX VNG-BR ULTRA LITE 32BITS🟠", link: "https://www.mediafire.com/file/07lchpcenredx7b/🇧🇷ROBLOX+VNG-BR+ULTRA+LITE+32BITS🇻🇳.apk/file" }
+            { nome: "ROBLOX VNG SEMI LITE 32BITS🟢", link: "https://www.mediafire.com/file/s8czvymd462ior1/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_SEMI_LITE_32BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
+            { nome: "ROBLOX VNG SEMI LITE 64BIT⚪", link: "https://www.mediafire.com/file/g2lfih9f4vzqpsi/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_SEMI_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
+            { nome: "ROBLOX VNG LITE 64BITS⚪", link: "https://www.mediafire.com/file/nbp4y2hkghn39gj/%25F0%259F%2587%25A7%25F0%259F%2587%25B7ROBLOX_VNG-BR_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
+            { nome: "ROBLOX VNG ULTRA LITE 32BITS🟢", link: "https://www.mediafire.com/file/07lchpcenredx7b/🇧🇷ROBLOX+VNG-BR+ULTRA+LITE+32BITS🇻🇳.apk/file" }
         ]
     },
     tab8: {
@@ -666,31 +871,10 @@ const executoresConfig = {
             { nome: "LIME LITE 64BITS🔵GT", link: "https://www.mediafire.com/file/crnvozckoqbi07j/🤡LIME+LITE+64BITS🤡.apk/file" }
         ]
     },
-    tab8vng: {
-        titulo: "EXECUTO LITE VNG-BR",
-        itens: [
-            { nome: "DELTA VNG-BR LITE 64BITS🔵GT", link: "https://www.mediafire.com/file/gdi1iirjq31x940/%25F0%259F%2587%25A7%25F0%259F%2587%25B7DELTA_VNG-BR_LITE_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
-            { nome: "ARCEUS VNG-BR LITE 64BITS🔵🔓GT", link: "https://www.mediafire.com/file/f1w2fiyvemgbahg/🇧🇷ARCEUS+VNG-BR+LITE+64BITS🇻🇳.apk/file" }
-        ]
-    },
     tab1: {
         titulo: "EXECUTOR GTVZ",
         itens: [
             { nome: "DELTA 64BITS🟢GT", link: "https://www.mediafire.com/file/g7lj1kd6gxhumxe/❄️DELTA+64BITS❄️.apk/file" }
-        ]
-    },
-    tab2: {
-        titulo: "GTVZ VNG-BR",
-        itens: [
-            { nome: "DELTA VNG-BR 64BITS🔴GT", link: "https://www.mediafire.com/file/q6e6s4yui8eq28p/%25F0%259F%2587%25A7%25F0%259F%2587%25B7DELTA_VNG-BR_64BITS%25F0%259F%2587%25BB%25F0%259F%2587%25B3.apk/file" },
-            { nome: "ARCEUS VNG-BR 64BITS🔴🔓GT", link: "https://www.mediafire.com/file/ul14b6fywm6y6qp/🇧🇷ARCEUS+VNG-BR+64BITS🇻🇳.apk/file" }
-        ]
-    },
-    tab4: {
-        titulo: "VNG",
-        itens: [
-            { nome: "DELTA VNG 64BITS", link: "https://cdn.gloopup.net/file/Delta-2.717.985-VN.apk" },
-            { nome: "ARCEUS VNG 64BITS", link: "https://www.mediafire.com/file/ran6ctu39v8yc37/Roblox.-.VNG.Arceus.X.NEO.2.1.6.apk/file" }
         ]
     },
     tab3: {
@@ -748,15 +932,10 @@ function criarCard(titulo, item) {
 
     const btn = card.querySelector('.download-btn');
     let pressed = false;
-    let startX = 0;
-    let startY = 0;
 
-    const press = (e) => {
+    const press = () => {
         pressed = true;
         btn.classList.add('pressed');
-        const point = e.touches ? e.touches[0] : e;
-        startX = point.clientX;
-        startY = point.clientY;
     };
 
     const release = (e) => {
@@ -790,12 +969,51 @@ function criarCard(titulo, item) {
     return card;
 }
 
+// Função para aplicar o comportamento personalizado sem menu de contexto no botão de download
+function configurarBotaoInterativo(btnElement, urlDestino) {
+    let pressed = false;
+
+    const press = () => {
+        pressed = true;
+        btnElement.classList.add('pressed');
+    };
+
+    const release = (e) => {
+        if (!pressed) return;
+        pressed = false;
+        btnElement.classList.remove('pressed');
+
+        const point = e.changedTouches ? e.changedTouches[0] : e;
+        const rect = btnElement.getBoundingClientRect();
+        const isInside = point.clientX >= rect.left && point.clientX <= rect.right &&
+                         point.clientY >= rect.top && point.clientY <= rect.bottom;
+
+        if (isInside) {
+            window.open(urlDestino, '_blank');
+        }
+    };
+
+    const cancel = () => {
+        pressed = false;
+        btnElement.classList.remove('pressed');
+    };
+
+    btnElement.addEventListener('touchstart', press, { passive: true });
+    btnElement.addEventListener('touchend', release, { passive: true });
+    btnElement.addEventListener('touchcancel', cancel, { passive: true });
+
+    btnElement.addEventListener('mousedown', press);
+    btnElement.addEventListener('mouseup', release);
+    btnElement.addEventListener('mouseleave', cancel);
+}
+
+// Configura o botão de download do conversor
+configurarBotaoInterativo(document.getElementById('btnDownloadConversor'), 'https://www.mediafire.com/file/5x64sr7k2op42bx/CONVERSOR.apk/file');
+
 function renderizarConteudo() {
     const tabContents = {
         'tab1': document.getElementById('tab1'),
-        'tab2': document.getElementById('tab2'),
         'tab3': document.getElementById('tab3'),
-        'tab4': document.getElementById('tab4'),
         'tab5': document.getElementById('tab5'),
         'tab6': document.getElementById('tab6'),
         'tab7': document.getElementById('tab7'),
@@ -815,16 +1033,7 @@ function renderizarConteudo() {
         executoresConfig.tab5vng.itens.forEach(item => tab5.appendChild(criarCard(executoresConfig.tab5vng.titulo, item)));
     }
 
-    const tab8 = tabContents['tab8'];
-    if (tab8) {
-        executoresConfig.tab8.itens.forEach(item => tab8.appendChild(criarCard(executoresConfig.tab8.titulo, item)));
-        const divider = document.createElement('div');
-        divider.style.cssText = 'width:100%;height:2px;background:linear-gradient(90deg,transparent,#15803d,#16a34a,#15803d,transparent);margin:20px 0;border-radius:2px;';
-        tab8.appendChild(divider);
-        executoresConfig.tab8vng.itens.forEach(item => tab8.appendChild(criarCard(executoresConfig.tab8vng.titulo, item)));
-    }
-
-    const abasSimples = ['tab1', 'tab2', 'tab3', 'tab4', 'tab6', 'tab7'];
+    const abasSimples = ['tab1', 'tab3', 'tab6', 'tab7', 'tab8'];
     abasSimples.forEach(id => {
         if (executoresConfig[id] && tabContents[id]) {
             executoresConfig[id].itens.forEach(item => tabContents[id].appendChild(criarCard(executoresConfig[id].titulo, item)));
@@ -833,21 +1042,21 @@ function renderizarConteudo() {
 }
 
 const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
-const tabOrder = ['tab5', 'tab8', 'tab1', 'tab2', 'tab4', 'tab3', 'tab6', 'tab7'];
+const tabOrder = ['tab5', 'tab8', 'tab1', 'tab3', 'tab6', 'tab7'];
 let currentTabId = 'tab5';
 
 const tabContents = {
     'tab1': document.getElementById('tab1'),
-    'tab2': document.getElementById('tab2'),
     'tab3': document.getElementById('tab3'),
-    'tab4': document.getElementById('tab4'),
     'tab5': document.getElementById('tab5'),
     'tab6': document.getElementById('tab6'),
     'tab7': document.getElementById('tab7'),
-    'tab8': document.getElementById('tab8')
+    'tab8': document.getElementById('tab8'),
+    'tabConverter': document.getElementById('tabConverter')
 };
 const profileSection = document.getElementById('profileSection');
 const navHome = document.getElementById('nav-home');
+const navConverter = document.getElementById('nav-converter');
 const navPerfil = document.getElementById('nav-perfil');
 const navItems = document.querySelectorAll('.nav-item');
 const tabsMenu = document.querySelector('.tabs-menu');
@@ -889,7 +1098,9 @@ function switchTab(activeTabId, direction = 'none') {
         btn.classList.remove('active');
         if (btn.getAttribute('data-tab') === activeTabId) {
             btn.classList.add('active');
-            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            setTimeout(() => {
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }, 50);
         }
     });
 
@@ -911,6 +1122,17 @@ function showHome() {
     tabsMenu.style.display = 'flex';
     profileSection.classList.add('hidden');
     switchTab(currentTabId || 'tab5');
+    
+    if (tabsMenu) {
+        tabsMenu.scrollLeft = 0;
+    }
+
+    const firstTabBtn = document.querySelector('.tab-btn.active');
+    if (firstTabBtn) {
+        setTimeout(() => {
+            firstTabBtn.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        }, 50);
+    }
 }
 
 tabButtons.forEach(button => {
@@ -921,22 +1143,49 @@ tabButtons.forEach(button => {
             const newIndex = tabOrder.indexOf(tabId);
             const dir = newIndex > oldIndex ? 'left' : 'right';
             navHome.classList.add('active');
+            navConverter.classList.remove('active');
             navPerfil.classList.remove('active');
+            navHome.querySelector('.nav-indicator').style.display = 'block';
             switchTab(tabId, dir);
         }
     });
 });
 
 navHome.addEventListener('click', function() {
-    navItems.forEach(item => item.classList.remove('active'));
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.nav-indicator').style.display = 'none';
+    });
     this.classList.add('active');
+    this.querySelector('.nav-indicator').style.display = 'block';
     showHome();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-navPerfil.addEventListener('click', function() {
-    navItems.forEach(item => item.classList.remove('active'));
+navConverter.addEventListener('click', function() {
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.nav-indicator').style.display = 'none';
+    });
     this.classList.add('active');
+    this.querySelector('.nav-indicator').style.display = 'block';
+    
+    for (let id in tabContents) {
+        if (tabContents[id]) tabContents[id].classList.add('hidden');
+    }
+    tabsMenu.style.display = 'none';
+    profileSection.classList.add('hidden');
+    tabConverter.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+navPerfil.addEventListener('click', function() {
+    navItems.forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.nav-indicator').style.display = 'none';
+    });
+    this.classList.add('active');
+    this.querySelector('.nav-indicator').style.display = 'block';
     showProfile();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -954,7 +1203,7 @@ swipeContainer.addEventListener('touchend', e => {
     const touchEndX = e.changedTouches[0].screenX;
     const touchEndY = e.changedTouches[0].screenY;
     
-    if (!profileSection.classList.contains('hidden')) return;
+    if (!profileSection.classList.contains('hidden') || !tabConverter.classList.contains('hidden')) return;
 
     const diffX = touchEndX - touchStartX;
     const diffY = touchEndY - touchStartY;
@@ -964,12 +1213,16 @@ swipeContainer.addEventListener('touchend', e => {
         if (diffX < 0) {
             if (currentIndex < tabOrder.length - 1) {
                 navHome.classList.add('active');
+                navHome.querySelector('.nav-indicator').style.display = 'block';
+                navConverter.classList.remove('active');
                 navPerfil.classList.remove('active');
                 switchTab(tabOrder[currentIndex + 1], 'left');
             }
         } else {
             if (currentIndex > 0) {
                 navHome.classList.add('active');
+                navHome.querySelector('.nav-indicator').style.display = 'block';
+                navConverter.classList.remove('active');
                 navPerfil.classList.remove('active');
                 switchTab(tabOrder[currentIndex - 1], 'right');
             }
